@@ -4,14 +4,14 @@ A RESTful API backend for a mentorship platform where **parents**, **students**,
 
 ## Features
 
-- 🔐 **JWT Authentication** — Secure signup/login with password hashing (bcrypt)
-- 👨‍👩‍👧 **Student Management** — Parents create and manage student profiles
-- 📚 **Lesson System** — Mentors create and manage lessons
-- 📅 **Booking System** — Parents assign students to lessons
-- 🎓 **Session System** — Mentors create sessions, students can join
-- 🤖 **LLM Summarization** — AI-powered text summarization via Google Gemini
-- 🛡️ **Role-based Access Control** — Fine-grained permissions per role
-- ⚡ **Rate Limiting** — Protection against API abuse
+-  **JWT Authentication** — Secure signup/login with password hashing (bcrypt)
+-  **Student Management** — Parents create and manage student profiles
+- **Lesson System** — Mentors create and manage lessons
+- **Booking System** — Parents assign students to lessons
+-  **Session System** — Mentors create sessions, students can join
+-  **LLM Summarization** — AI-powered text summarization via Google Gemini
+- **Role-based Access Control** — Fine-grained permissions per role
+- **Rate Limiting** — Protection against API abuse
 
 ---
 
