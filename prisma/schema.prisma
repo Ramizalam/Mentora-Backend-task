@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  PARENT
+  MENTOR
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      Role
+  createdAt DateTime @default(now())
+
+  students Student[]
+  lessons  Lesson[]
+}
+
+model Student {
+  id        String   @id @default(uuid())
+  name      String
+  age       Int
+  parentId  String
+  createdAt DateTime @default(now())
+
+  parent           User              @relation(fields: [parentId], references: [id])
+  bookings         Booking[]
+  sessionAttendees SessionAttendee[]
+}
+
+model Lesson {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  mentorId    String
+  createdAt   DateTime @default(now())
+
+  mentor   User      @relation(fields: [mentorId], references: [id])
+  bookings Booking[]
+  sessions Session[]
+}
+
+model Booking {
+  id        String   @id @default(uuid())
+  studentId String
+  lessonId  String
+  createdAt DateTime @default(now())
+
+  student Student @relation(fields: [studentId], references: [id])
+  lesson  Lesson  @relation(fields: [lessonId], references: [id])
+
+  @@unique([studentId, lessonId])
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  lessonId  String
+  date      DateTime
+  topic     String
+  summary   String?
+  createdAt DateTime @default(now())
+
+  lesson    Lesson            @relation(fields: [lessonId], references: [id])
+  attendees SessionAttendee[]
+}
+
+model SessionAttendee {
+  sessionId String
+  studentId String
+  joinedAt  DateTime @default(now())
+
+  session Session @relation(fields: [sessionId], references: [id])
+  student Student @relation(fields: [studentId], references: [id])
+
+  @@unique([sessionId, studentId])
+}
